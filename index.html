@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carta para Nuestro Invitado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+:root{--papel:#fbf9f5;--tinta:#2a2622;--oro:#a98a5f;--sobre:#d9c39a;--sobre2:#c9ae7c;--lacre:#8f2a20}
+*{box-sizing:border-box}
+body{margin:0;background:#f1ede6;color:var(--tinta);font-family:"Cormorant Garamond",serif;display:flex;justify-content:center;min-height:100vh}
+main{width:100%;max-width:760px;background:var(--papel);padding:56px 16px 72px;text-align:center;border-left:1px solid #e3dccf;border-right:1px solid #e3dccf}
+.sup{font:600 13px Montserrat,sans-serif;letter-spacing:.3em;color:var(--oro);text-transform:uppercase}
+h1{font-weight:400;font-size:clamp(30px,6vw,40px);margin:10px 0 6px}
+.sub{font-style:italic;font-size:18px;color:#5a5249;margin:0 0 30px}
+
+/* Ruleta */
+.ruleta{position:relative;height:250px;overflow:hidden;margin:0 -16px;
+ -webkit-mask-image:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent);
+ mask-image:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent)}
+.item{position:absolute;left:50%;top:50%;width:190px;height:128px;margin:-64px 0 0 -95px;
+ background:linear-gradient(160deg,var(--sobre),var(--sobre2));border:0;padding:0;cursor:pointer;
+ box-shadow:0 6px 18px rgba(80,55,20,.22);transition:transform 1.6s cubic-bezier(.45,0,.25,1),opacity 1.6s ease;
+ font-family:inherit;color:var(--tinta)}
+.item::before{content:"";position:absolute;inset:0;background:linear-gradient(to bottom right,transparent 49.6%,rgba(90,60,20,.18) 50%) top/100% 60% no-repeat,linear-gradient(to bottom left,transparent 49.6%,rgba(90,60,20,.18) 50%) top/100% 60% no-repeat}
+.item .n{position:absolute;left:8px;right:8px;bottom:14px;font-family:"Pinyon Script",cursive;font-size:24px;line-height:1.1}
+.item .lacre{display:none}
+.item.centro{cursor:pointer}
+.item.centro .lacre{display:block;position:absolute;left:50%;top:38%;width:38px;height:38px;margin:-19px 0 0 -19px;border-radius:52% 48% 55% 45%;background:radial-gradient(circle at 35% 30%,#b2382c,var(--lacre) 70%);box-shadow:0 2px 6px rgba(60,10,5,.4);color:#e8c7bf;font:italic 13px "Cormorant Garamond",serif;line-height:38px}
+.item:focus-visible{outline:1px solid var(--oro);outline-offset:4px}
+.pista{font-style:italic;color:#7a6f61;margin:8px 0 0;font-size:17px;min-height:26px}
+
+/* Carta abierta */
+.velo{position:fixed;inset:0;background:rgba(40,30,20,.55);display:none;align-items:center;justify-content:center;padding:20px;z-index:10}
+.velo.abierto{display:flex}
+.pergamino{position:relative;width:100%;max-width:480px;max-height:88vh;overflow:auto;padding:52px 36px 44px;
+ background:radial-gradient(ellipse at 20% 10%,#f3e6c8,#e6d3a9 70%,#d8c090);box-shadow:0 20px 60px rgba(0,0,0,.4);
+ animation:abrir .7s ease both;text-align:center}
+@keyframes abrir{from{opacity:0;transform:translateY(24px) scale(.94)}to{opacity:1;transform:none}}
+.para{font-family:"Pinyon Script",cursive;font-size:clamp(34px,8vw,46px);color:#3b2f22;margin:0 0 22px;line-height:1.15}
+.pergamino p{font-size:21px;line-height:1.55;margin:0 0 14px;color:#3b3229}
+.firma{font-family:"Pinyon Script",cursive;font-size:30px;margin-top:22px}
+.cerrar{position:absolute;top:12px;right:16px;background:none;border:0;font:28px "Cormorant Garamond",serif;color:#6b5a42;cursor:pointer}
+
+/* Música */
+.musica{position:fixed;right:16px;bottom:16px;width:42px;height:42px;border-radius:50%;border:1px solid var(--oro);background:var(--papel);color:var(--oro);cursor:pointer;font-size:18px;z-index:5}
+@media (prefers-reduced-motion:reduce){.item{transition:none}.pergamino{animation:none}}
+</style>
+</head>
+<body>
+<main>
+  <div class="sup">Un mensaje para ti</div>
+  <h1>Carta para Nuestro Invitado</h1>
+  <p class="sub">Toque su carta cuando llegue al centro</p>
+
+  <div class="ruleta" id="ruleta" aria-label="Cartas de invitados"></div>
+  <p class="pista" id="pista"></p>
+</main>
+
+<div class="velo" id="velo" role="dialog" aria-modal="true">
+  <div class="pergamino">
+    <button class="cerrar" id="cerrar" aria-label="Cerrar">&times;</button>
+    <div class="para" id="para"></div>
+    <!-- Sustituye el texto de la carta por el tuyo -->
+    <p>Gracias por acompañarnos en este día tan especial.</p>
+    <p>Su presencia hace que nuestra celebración sea completa.</p>
+    <div class="firma">A &amp; R</div>
+  </div>
+</div>
+
+<button class="musica" id="musica" aria-label="Música">♪</button>
+<audio id="audio" src="assets/musica.mp3" loop preload="auto"></audio>
+
+<script>
+/* ===== Lista de invitados: edita aquí. Se ordena sola alfabéticamente ===== */
+const INVITADOS = [
+  "Roberto Figueroa","Ana Martínez","Carlos Hernández","Beatriz Solís",
+  "Diego Ramírez","Elena Torres","Fernando Ortega","Gabriela Núñez"
+];
+
+const nombres = [...INVITADOS].sort((a,b)=>a.localeCompare(b,"es"));
+const N = nombres.length;
+const ruleta = document.getElementById("ruleta");
+const pista = document.getElementById("pista");
+const items = nombres.map((nom,i)=>{
+  const b = document.createElement("button");
+  b.className = "item";
+  b.innerHTML = '<span class="lacre">A&amp;R</span><span class="n"></span>';
+  b.querySelector(".n").textContent = nom;
+  b.addEventListener("click",()=>{ i===idx ? abrir(nom) : (idx=i, pintar(), pausa()); });
+  ruleta.appendChild(b);
+  return b;
+});
+
+let idx = 0, timer, espera;
+const paso = () => Math.min(210, ruleta.clientWidth*0.38);
+
+function pintar(){
+  const p = paso();
+  items.forEach((el,i)=>{
+    let d = ((i-idx+N+Math.floor(N/2)) % N) - Math.floor(N/2);
+    const a = Math.abs(d);
+    const esc = a===0 ? 1.18 : a===1 ? .82 : .62;
+    el.style.transform = `translateX(${d*p}px) scale(${esc})`;
+    el.style.opacity = a===0 ? 1 : a===1 ? .75 : a===2 ? .3 : 0;
+    el.style.zIndex = 10-a;
+    el.style.pointerEvents = a>2 ? "none" : "auto";
+    el.classList.toggle("centro", a===0);
+    el.tabIndex = a<=1 ? 0 : -1;
+  });
+  pista.textContent = "";
+}
+function avanzar(){ idx = (idx+1)%N; pintar(); }
+function iniciar(){ clearInterval(timer); timer = setInterval(avanzar, 3600); }
+function pausa(){ clearInterval(timer); clearTimeout(espera); espera = setTimeout(iniciar, 9000); }
+ruleta.addEventListener("mouseenter",()=>clearInterval(timer));
+ruleta.addEventListener("mouseleave",iniciar);
+window.addEventListener("resize",pintar);
+pintar(); iniciar();
+
+/* Carta */
+const velo = document.getElementById("velo");
+function abrir(nom){
+  document.getElementById("para").textContent = nom;
+  velo.classList.add("abierto"); clearInterval(timer);
+}
+function cerrar(){ velo.classList.remove("abierto"); iniciar(); }
+document.getElementById("cerrar").onclick = cerrar;
+velo.addEventListener("click",e=>{ if(e.target===velo) cerrar(); });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") cerrar(); });
+
+/* Música: intenta al cargar; si el navegador la bloquea, arranca con el primer toque */
+const audio = document.getElementById("audio"), btn = document.getElementById("musica");
+audio.volume = .6;
+function sync(){ btn.style.opacity = audio.paused ? .5 : 1; btn.textContent = audio.paused ? "♪̸" : "♪"; }
+function sonar(){ return audio.play().then(sync).catch(()=>{}); }
+sonar();
+["click","touchstart","keydown","wheel"].forEach(ev=>{
+  const h = (e)=>{ if(btn.contains(e.target)) return; if(!audio.paused){ cleanup(); return; } sonar().then(()=>{ if(!audio.paused) cleanup(); }); };
+  const cleanup = ()=>["click","touchstart","keydown","wheel"].forEach(x=>window.removeEventListener(x,h));
+  window.addEventListener(ev,h,{passive:true});
+});
+btn.addEventListener("click",e=>{ e.stopPropagation(); audio.paused ? sonar() : (audio.pause(), sync()); });
+audio.addEventListener("play",sync); audio.addEventListener("pause",sync); sync();
+</script>
+</body>
+</html>
