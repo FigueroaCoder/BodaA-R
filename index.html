@@ -2,10 +2,29 @@
 <html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#F4F0E8">
     <title>Boda Civil: Areli & Roberto</title>
     
+        <style>
+        /* base propia (no depende de Tailwind): evita que el celular "se aleje" mientras carga */
+        html,body{max-width:100%;overflow-x:hidden}
+        img,svg{max-width:100%}
+        #envSrc{display:none}
+        main img[alt="Rosa de Cera"]{width:3.5rem;height:3.5rem;object-fit:contain}
+        @media (min-width:640px){main img[alt="Rosa de Cera"]{width:5rem;height:5rem}}
+        /* portada de entrada: un toque abre la invitación y arranca la música */
+        #portada{position:fixed;left:0;top:0;right:0;bottom:0;z-index:2000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:24px;text-align:center;background-color:#F4F0E8;background-image:radial-gradient(#E2DACD .75px,transparent .75px);background-size:28px 28px;transition:opacity 1s ease,visibility 1s}
+        #portada.fuera{opacity:0;visibility:hidden;pointer-events:none}
+        .p-ring{width:156px;height:156px;border-radius:50%;border:1px solid rgba(197,168,128,.65);display:flex;align-items:center;justify-content:center;position:relative}
+        .p-ring::after{content:"";position:absolute;inset:6px;border-radius:50%;border:1px solid rgba(197,168,128,.4)}
+        .p-ring span{font-family:"Cormorant Garamond",serif;font-weight:300;font-size:2.1rem;letter-spacing:.25em;padding-left:.25em;color:#9E8056}
+        .p-nombres{font-family:"Pinyon Script",cursive;font-size:2.7rem;line-height:1.15;color:#2C2B29}
+        .p-btn{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:1.3rem;color:#FDFBF7;background:#2C2B29;border:0;padding:.85rem 2.2rem;border-radius:2px;cursor:pointer;margin-top:8px}
+        .p-nota{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:1rem;color:#59534C}
+        body.esperando{overflow:hidden}
+        body.esperando .pantalla-hero .fade-in-element{opacity:0!important;transform:translateY(22px)!important}
+    </style>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -179,7 +198,15 @@
         .pdf-portada{justify-content:center;align-items:center;text-align:center}
     </style>
 </head>
-<body class="min-h-screen py-2 sm:py-6 md:py-14 px-2 sm:px-6 flex flex-col items-center no-scrollbar">
+<body class="esperando min-h-screen py-2 sm:py-6 md:py-14 px-2 sm:px-6 flex flex-col items-center no-scrollbar">
+    <div id="portada">
+        <div class="p-ring"><span>A &amp; R</span></div>
+        <div class="p-nombres">Areli &amp; Roberto</div>
+        <div class="p-nota">tienes una invitación</div>
+        <button type="button" class="p-btn" onclick="abrirInvitacion()">abrir invitación</button>
+        <div class="p-nota" style="font-size:.9rem;opacity:.8">toca para abrir y escuchar la música</div>
+    </div>
+
 
     <!-- Botón Flotante para Música Ambiental -->
     <div class="fixed z-50 right-3 sm:right-4 top-[max(0.75rem,env(safe-area-inset-top))]">
@@ -238,27 +265,27 @@
         <section class="pantalla pantalla-hero">
             <!-- Monograma Iniciales Central (estilo vintage, doble círculo concéntrico) -->
             <div class="fade-in-element mb-8 pt-2">
-                <div class="relative w-28 h-28 sm:w-32 sm:h-32 mx-auto flex items-center justify-center">
+                <div class="relative w-36 h-36 sm:w-32 sm:h-32 mx-auto flex items-center justify-center">
                     <div class="absolute inset-0 rounded-full border border-goldAccent/50"></div>
                     <div class="absolute inset-[6px] rounded-full border border-goldAccent/35"></div>
-                    <span class="relative font-serif text-goldDark text-2xl sm:text-3xl tracking-[0.25em] font-light pl-[0.25em]">A &amp; R</span>
+                    <span class="relative font-serif text-goldDark text-3xl tracking-[0.25em] font-light pl-[0.25em]">A &amp; R</span>
                 </div>
                 <div class="w-14 h-px bg-goldAccent/40 mx-auto mt-5"></div>
             </div>
 
             <!-- Encabezado Formal -->
             <div class="fade-in-element mb-8 space-y-3">
-                <p class="font-sans text-[10px] sm:text-xs uppercase tracking-[0.3em] text-mutedSepia/80 font-light">
-                    UN INSTANTE PUEDE SER BREVE PARA EL TIEMPO 
+                <p class="font-serif text-base sm:text-lg italic tracking-[0.12em] text-mutedSepia/80 font-light">
+                    un instante puede ser breve para el tiempo 
                 </p>
-                <p class="font-serif text-base sm:text-lg italic text-charcoal/80">
-                    Y ETERNO PARA QUIENES LO VIVEN 
+                <p class="font-serif text-xl sm:text-2xl italic text-charcoal/80">
+                    y eterno para quienes lo viven 
                 </p>
             </div>
 
             <!-- Nombres de los Novios -->
             <div class="fade-in-element my-6 py-2 relative">
-                <h1 class="font-script text-[clamp(2rem,10.5vw,2.8rem)] sm:text-7xl text-charcoal font-normal leading-snug">
+                <h1 class="font-script text-[clamp(2.3rem,12vw,3.2rem)] sm:text-7xl text-charcoal font-normal leading-snug">
                     Areli Ríos
                 </h1>
                 <div class="flex items-center justify-center my-1 gap-4">
@@ -266,7 +293,7 @@
                     <span class="font-serif italic text-xl text-goldDark">&</span>
                     <span class="w-12 h-px bg-goldAccent/40"></span>
                 </div>
-                <h1 class="font-script text-[clamp(2rem,10.5vw,2.8rem)] sm:text-7xl text-charcoal font-normal leading-snug">
+                <h1 class="font-script text-[clamp(2.3rem,12vw,3.2rem)] sm:text-7xl text-charcoal font-normal leading-snug">
                     Roberto Figueroa
                 </h1>
             </div>
@@ -880,5 +907,15 @@ Sé que a veces no está en nuestras manos poder estar en todo, así que si esta
             evs.forEach(x => window.addEventListener(x, arrancar, true));
         });
     </script>
+<script>
+    function abrirInvitacion() {
+        const m = document.getElementById('bgMusic');
+        m.muted = false; m.volume = 0.6;
+        const p = m.play(); if (p && p.catch) p.catch(() => {});
+        document.body.classList.remove('esperando');
+        document.getElementById('portada').classList.add('fuera');
+        window.scrollTo(0, 0);
+    }
+</script>
 </body>
 </html>
