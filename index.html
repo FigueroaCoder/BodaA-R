@@ -662,7 +662,7 @@ Sé que a veces no está en nuestras manos poder estar en todo, así que si esta
         pintaRuleta(); requestAnimationFrame(cuadro);
 
         /* ================= CONTRASEÑAS (una por invitado, en minúsculas) ================= */
-        const CLAVES = {"Claudia Rodríguez": 1144909753728381, "José Ríos": 236238020157721, "Roberto Figueroa": 5955324091773567, "Martha Ibarra": 3608486367638157, "Valeria Ríos": 7172798056118496, "Gris Ríos": 6324136109524219, "Martín Alberto": 4921947793953525, "Nazareth Ríos": 7373550564863241, "Jareth Ríos": 1956683934126629, "Hilda Rubio": 637811896650123};
+        const CLAVES = {"Claudia Rodríguez": 3765121480089589, "José Ríos": 3625053535641490, "Roberto Figueroa": 927242239563900, "Martha Ibarra": 4971710416203042, "Valeria Ríos": 4236964121907922, "Gris Ríos": 8025769138075164, "Martín Alberto": 4971710416203042, "Nazareth Ríos": 5139631878163642, "Jareth Ríos": 1565214575814637, "Hilda Rubio": 4523193436840809};
         const hz=(s,seed=7)=>{let h1=0xdeadbeef^seed,h2=0x41c6ce57^seed;for(let i=0;i<s.length;i++){const c=s.charCodeAt(i);h1=Math.imul(h1^c,2654435761);h2=Math.imul(h2^c,1597334677);}h1=Math.imul(h1^(h1>>>16),2246822507);h1^=Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507);h2^=Math.imul(h1^(h1>>>13),3266489909);return 4294967296*(2097151&h2)+(h1>>>0);};
         const norm = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[\s\-_.]/g, '');
         const gid = id => document.getElementById(id);
@@ -849,7 +849,7 @@ Sé que a veces no está en nuestras manos poder estar en todo, así que si esta
                2) Si el navegador lo bloquea (normal en celulares), arranca en silencio y se activa el sonido
                   con el primer toque en cualquier parte de la pantalla.
                3) Si ni así, arranca con el primer toque. */
-            const evs = ['pointerdown', 'pointerup', 'touchend', 'click', 'keydown'];
+            const evs = ['touchstart', 'pointerdown', 'pointerup', 'touchend', 'click', 'keydown'];
             let reanudar = false;
             function desarmar() { evs.forEach(x => window.removeEventListener(x, arrancar, true)); }
             function arrancar(e) {
