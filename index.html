@@ -131,8 +131,8 @@
         /* ===== ADAPTACIÓN A CELULAR: pantallas que se revelan al bajar ===== */
         html { -webkit-text-size-adjust: 100%; overflow-x: hidden; }
         body { overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
-        .pantalla { position: relative; display: flex; flex-direction: column; justify-content: center;
-            min-height: calc(var(--H, 100svh) * .72); }
+        .pantalla { position: relative; display: flex; flex-direction: column; justify-content: flex-start;
+            min-height: 0; padding: .5rem 0; }
         .pantalla-hero { min-height: calc(var(--H, 100svh) - 2.5rem); }
         @media (min-width: 640px) and (pointer: fine) {
             .pantalla, .pantalla-hero { min-height: 0; }
@@ -187,6 +187,12 @@
         .pdf-firma{font-family:"Pinyon Script",cursive;font-size:50px;color:#9E8056;text-align:right;margin:8px 0 0;line-height:1.2}
         .pdf-pie{text-align:center;font-family:"Cormorant Garamond",serif;font-style:italic;font-size:16px;letter-spacing:.06em;color:#9E8056;padding-top:14px}
         .pdf-portada{justify-content:center;align-items:center;text-align:center}
+        .pdf-f1{position:relative;background:linear-gradient(180deg,#FFFEFB,#FBF6EC)}
+        .pdf-c{position:absolute;width:26px;height:26px;border:0 solid #C5A880}.pdf-c.tl{top:-1px;left:-1px;border-top-width:3px;border-left-width:3px}.pdf-c.tr{top:-1px;right:-1px;border-top-width:3px;border-right-width:3px}.pdf-c.bl{bottom:-1px;left:-1px;border-bottom-width:3px;border-left-width:3px}.pdf-c.br{bottom:-1px;right:-1px;border-bottom-width:3px;border-right-width:3px}
+        .pdf-cab .l{font-family:"Montserrat",sans-serif;font-size:12px;letter-spacing:.42em;color:#9E8056;text-transform:uppercase;margin-bottom:6px}
+        .pdf-cab .a{font-size:62px}.pdf-cab .para{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:19px;color:#7a6c57;margin-top:6px}
+        .pdf-orn{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:12px}.pdf-orn i{width:80px;border-top:1px solid #DCCFB8}.pdf-orn b{width:7px;height:7px;background:#C5A880;transform:rotate(45deg)}
+        .pdf-mono{width:150px;height:150px;border-radius:50%;border:1px solid #C5A880;box-shadow:inset 0 0 0 7px #FDFBF7,inset 0 0 0 8px #E6DCCB;display:flex;align-items:center;justify-content:center;font-family:"Cormorant Garamond",serif;font-size:40px;letter-spacing:.22em;padding-left:.22em;color:#9E8056;margin-bottom:34px}
     </style>
 </head>
 <body class="cover-on min-h-screen py-2 sm:py-6 md:py-14 px-2 sm:px-6 flex flex-col items-center no-scrollbar">
@@ -308,7 +314,7 @@
 
         <section class="pantalla">
             <!-- Fecha del Enlace -->
-            <div class="fade-in-element my-8 py-5 border-y border-goldAccent/25 max-w-lg mx-auto">
+            <div class="fade-in-element my-4 py-5 border-y border-goldAccent/25 max-w-lg mx-auto">
                 <p class="font-sans text-[10px] uppercase tracking-[0.3em] text-goldDark font-semibold mb-3">
                     Viernes
                 </p>
@@ -334,7 +340,7 @@
 
         <section class="pantalla">
             <!-- Detalles del Registro Civil -->
-            <div class="fade-in-element my-10 space-y-6 max-w-lg mx-auto">
+            <div class="fade-in-element my-5 space-y-6 max-w-lg mx-auto">
                 <div class="space-y-2">
                     <span class="font-sans text-[10px] uppercase tracking-[0.3em] text-goldDark font-semibold block">
                         — Lugar de la Ceremonia —
@@ -356,7 +362,7 @@
             </div>
 
             <!-- Nota Informativa -->
-            <div class="fade-in-element my-10 py-6 px-4 bg-ivory/70 rounded border border-warmSand max-w-md mx-auto">
+            <div class="fade-in-element my-5 py-6 px-4 bg-ivory/70 rounded border border-warmSand max-w-md mx-auto">
                 <span class="font-sans text-[10px] uppercase tracking-[0.25em] text-goldDark font-semibold block mb-2">
                     NOTA... 
                 </span>
@@ -369,7 +375,7 @@
 
         <section class="pantalla">
             <!-- SECCIÓN CARTA / SOBRE VINTAGE INTERACTIVO -->
-            <div class="fade-in-element mt-14 pt-8 border-t border-goldAccent/30 max-w-xl mx-auto">
+            <div class="fade-in-element mt-8 pt-5 border-t border-goldAccent/30 max-w-xl mx-auto">
                 
                 <div class="mb-6 space-y-1">
                     <span class="font-sans text-[10px] uppercase tracking-[0.3em] text-goldDark font-semibold block">
@@ -401,8 +407,8 @@
                         </div>
 
                         <div class="grid grid-cols-2 gap-3 mb-6">
-                            <button id="optNovia" type="button" onclick="verCarta('novia')" class="opt-btn"><span class="n">Areli</span><span class="t">la carta de la novia</span></button>
-                            <button id="optNovio" type="button" onclick="verCarta('novio')" class="opt-btn"><span class="n">Roberto</span><span class="t">la carta del novio</span></button>
+                            <button id="optNovia" type="button" onclick="verCarta('novia')" class="opt-btn"><span class="n">Areli Ríos</span><span class="t">su carta</span></button>
+                            <button id="optNovio" type="button" onclick="verCarta('novio')" class="opt-btn"><span class="n">Roberto Figueroa</span><span class="t">su carta</span></button>
                         </div>
                         <!-- Contenido dinámico escrito en la carta -->
                         <div class="space-y-6">
@@ -432,7 +438,7 @@
 
         <section class="pantalla">
             <!-- Footer / Confirmación WhatsApp -->
-            <div class="fade-in-element mt-12 pt-6 border-t border-goldAccent/20">
+            <div class="fade-in-element mt-6 pt-6 border-t border-goldAccent/20">
                 <a href="https://wa.me/qr/FFFVZYVBLAYEC1" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-charcoal hover:bg-goldDark text-cream px-7 py-3 rounded-xs font-sans text-xs uppercase tracking-[0.2em] transition-all duration-300 shadow">
                     Confirmar Asistencia por WhatsApp
                 </a>
@@ -514,7 +520,15 @@ Los quiero y admiro.
 Con cariño,`;
 
         const cartas = {
-            'Claudia Rodríguez': { header: 'Mamá', novio: ``, novia: `El día de hoy te escribo estas palabras para recordarte que eres de las personas más importantes en mi vida, y al ser así me gustaría que pudieras acompañarme en uno de los días más importantes y felices de mi vida, mi boda, el tiempo pasa rápido, en algún momento mis invitaciones eran a festivales de la escuela y ahora te pido que seas parte de la ceremonia que unirá mi vida a la de otra persona, te amo mamá y nada me haría más feliz que ese día pudieras estar presente en el momento que Roberto y yo pasemos de ser novios a esposos.
+            'Claudia Rodríguez': { header: 'Mamá', novio: `El 23 de octubre del presente año oficialmente se vivirá el día más importante de mi vida. Cuando yo conocí a su hija, no tardé mucho en darme cuenta de lo valiosa que ella era. No tardé en darme cuenta que, de seguir conociéndola, no habría algo que no haría por ella. Supe y decidí conocerla, puesto que nunca tuve dudas y nunca tendré dudas.
+
+Yo quiero ser un gran hombre para ella, amarla, respetarla, enseñarle que en el mundo aún existen personas con buenas intenciones, que aún existen personas que realmente quieren ver triunfar a otras y eso es justo lo que yo quiero. Quiero ver cómo Areli día tras día cumple cada uno de sus sueños y sus metas y yo estaré siempre para ella, para ayudarla, respaldarla, para reír, para vivir, para disfrutar. Y si en algún momento pasamos eventos que no nos gusten, afrontarlos juntos, ser un equipo.
+
+Creo que podría explayarme más, pero realmente lo que quiero decir es gracias. Gracias por todo, gracias por traer al mundo a la persona que más amo, a la persona que más me importa. Y de paso también gracias por haberme dado la confianza, dejarme pasar a su casa cuando yo era un simple desconocido.
+
+Quiero que sepan que en mi casa también siempre encontrarán en mi casa, que los quiero mucho y que realmente me gustaría verlos ese día por allá. Son personas muy importantes para Areli y para mí.
+
+Los invito el 23 de octubre de 2026 a nuestra boda civil.`, novia: `El día de hoy te escribo estas palabras para recordarte que eres de las personas más importantes en mi vida, y al ser así me gustaría que pudieras acompañarme en uno de los días más importantes y felices de mi vida, mi boda, el tiempo pasa rápido, en algún momento mis invitaciones eran a festivales de la escuela y ahora te pido que seas parte de la ceremonia que unirá mi vida a la de otra persona, te amo mamá y nada me haría más feliz que ese día pudieras estar presente en el momento que Roberto y yo pasemos de ser novios a esposos.
 
 Gracias por enseñarme cómo debo ser amada, porque si de alguien aprendí lo que merezco, es contigo, porque tú siempre has sido incondicional y paciente.❤️
 
@@ -522,7 +536,15 @@ Para mí es una bendición que quieras y aceptes a Roberto y las palabras se que
 
 Te amo mamá` },
 
-            'José Ríos': { header: 'Papá', novio: ``, novia: `Hola pa, el día de hoy te escribo estas palabras con un poco de sentimientos encontrados, ya que no me cae el 20 de cuando pasé de ser una niña que corría a los brazos de su papá, a ser una mujer que está a punto de casarse, quiero que sepas que agradezco todo lo que tuve que vivir porque solo así podría darme cuenta de que no pude elegir mejor hombre, así que me gustaría que el día que Roberto y yo nos casemos estuvieras presente, ya que para nosotros eres alguien importante y con quien estamos muy agradecidos, esperamos contar con tu presencia en ese día tan importante para nosotros, y aunque ahora sea mayor, siempre encontraré en tus brazos un refugio y en tus consejos una esperanza. ❤️
+            'José Ríos': { header: 'Papá', novio: `El 23 de octubre del presente año oficialmente se vivirá el día más importante de mi vida. Cuando yo conocí a su hija, no tardé mucho en darme cuenta de lo valiosa que ella era. No tardé en darme cuenta que, de seguir conociéndola, no habría algo que no haría por ella. Supe y decidí conocerla, puesto que nunca tuve dudas y nunca tendré dudas.
+
+Yo quiero ser un gran hombre para ella, amarla, respetarla, enseñarle que en el mundo aún existen personas con buenas intenciones, que aún existen personas que realmente quieren ver triunfar a otras y eso es justo lo que yo quiero. Quiero ver cómo Areli día tras día cumple cada uno de sus sueños y sus metas y yo estaré siempre para ella, para ayudarla, respaldarla, para reír, para vivir, para disfrutar. Y si en algún momento pasamos eventos que no nos gusten, afrontarlos juntos, ser un equipo.
+
+Creo que podría explayarme más, pero realmente lo que quiero decir es gracias. Gracias por todo, gracias por traer al mundo a la persona que más amo, a la persona que más me importa. Y de paso también gracias por haberme dado la confianza, dejarme pasar a su casa cuando yo era un simple desconocido.
+
+Quiero que sepan que en mi casa también siempre encontrarán en mi casa, que los quiero mucho y que realmente me gustaría verlos ese día por allá. Son personas muy importantes para Areli y para mí.
+
+Los invito el 23 de octubre de 2026 a nuestra boda civil.`, novia: `Hola pa, el día de hoy te escribo estas palabras con un poco de sentimientos encontrados, ya que no me cae el 20 de cuando pasé de ser una niña que corría a los brazos de su papá, a ser una mujer que está a punto de casarse, quiero que sepas que agradezco todo lo que tuve que vivir porque solo así podría darme cuenta de que no pude elegir mejor hombre, así que me gustaría que el día que Roberto y yo nos casemos estuvieras presente, ya que para nosotros eres alguien importante y con quien estamos muy agradecidos, esperamos contar con tu presencia en ese día tan importante para nosotros, y aunque ahora sea mayor, siempre encontraré en tus brazos un refugio y en tus consejos una esperanza. ❤️
 
 Gracias por apoyar mi relación con Roberto y por darnos la confianza, por aceptarlo y darle un lugar en la familia.
 
@@ -531,11 +553,29 @@ Te amo papá.` },
             'Roberto Figueroa': { header: 'Suegros', novio: ``, novia: TEXTO_SUEGROS },
             'Martha Ibarra':    { header: 'Suegros', novio: ``, novia: TEXTO_SUEGROS },
 
-            'Gris Ríos': { header: 'Gris', novio: ``, novia: `Hermana, como ya sabes, estoy a punto de casarme, y sabes? Me suena muy fuerte, pero es solo una palabra, un título, un papel, porque la realidad es que el amor que Roberto y yo nos tenemos no necesita ninguna validación, pero aún así, me pone muy feliz poder lograr esto al lado de quien considero el amor de mi vida, y te digo todo esto porque al ser un día y un evento tan importante para mí, quiero que las personas más importantes en mi vida y que sé que de manera genuina se alegrarán por nosotros estén ahí, presenciando algo que empieza con una pluma pero trasciende energéticamente con todos los corazones que conectan con la emoción del momento, y con el amor de la unión de las dos personas que firmarán ese papel, bueno, tú me entiendes.
+            'Gris Ríos': { header: 'Gris', novio: `Hola, Gris.
+
+Quiero decirte que estoy muy agradecido contigo y sé lo importante que eres para Areli y también lo eres para mí. Por eso quiero invitarte de corazón a nuestra boda este 23 de octubre.
+
+Y antes de terminar, quiero preguntarte algo: ¿quieres ser nuestra testigo junto a Valeria?
+
+Para nosotros sería muy especial que aceptaras y que formaras parte de este momento tan importante.`, novia: `Hermana, como ya sabes, estoy a punto de casarme, y sabes? Me suena muy fuerte, pero es solo una palabra, un título, un papel, porque la realidad es que el amor que Roberto y yo nos tenemos no necesita ninguna validación, pero aún así, me pone muy feliz poder lograr esto al lado de quien considero el amor de mi vida, y te digo todo esto porque al ser un día y un evento tan importante para mí, quiero que las personas más importantes en mi vida y que sé que de manera genuina se alegrarán por nosotros estén ahí, presenciando algo que empieza con una pluma pero trasciende energéticamente con todos los corazones que conectan con la emoción del momento, y con el amor de la unión de las dos personas que firmarán ese papel, bueno, tú me entiendes.
 
 Y si creo que alguien se alegra por los logros en mi vida de la manera más genuina y amorosa posible, eres tú, así que quiero que nos acompañes el día de nuestra boda, aunque sean unos pocos minutos, son minutos que quedan grabados en el corazón para siempre, y no concibo guardar ese momento en mi memoria sin ti, te amo hermana.` },
 
-            'Valeria Ríos': { header: 'Valeria', novio: ``, novia: `Vale, hoy quiero agradecerte por ser mi cómplice, mi incondicional, mi otra mitad.
+            'Valeria Ríos': { header: 'Valeria', novio: `Hola, Valeria.
+
+Te escribo esta carta para decirte que eres una de esas pocas personas que realmente sentimos muy cerca de nosotros de una manera genuina, con amor, y por ello te queremos invitar a compartir con nosotros el momento en el cual nos casamos.
+
+Nos haría muy feliz verte por allá, por lo que significa tu presencia en nuestra relación. Es decir, tú viste nuestros inicios, viste el proceso. Sabes que Areli y yo nos amamos, sabes que nos hemos esforzado por lograr esto, que realmente lo queremos y ahora nosotros lo que queremos es compartir con las personas especiales el momento y tú eres una de esas personas especiales.
+
+Gracias, Valeria. Te quiero decir, aprovechando esta oportunidad, que me encuentro sumamente agradecido contigo porque mi relación con Areli aún fortaleció. Ella y yo nos pudimos conocer más gracias en parte a que tú me diste posada en el cuarto de ustedes y no cualquier persona haría eso. Entonces, te lo agradezco.
+
+Y sabes, qué bueno que lo hiciste porque también pudimos compartir momentos de equipo los tres, noches de videojuegos en Roblox muy divertidas, risas, palabras que no conocía y que son bastante groseras, pero que aun así dan risa.
+
+Son muchas cosas, Valeria, no me alcanzaría todo el espacio de este código para decirte esas cosas, pero creo que tú, Areli y yo lo sabemos.
+
+Entonces, ¿qué te puedo decir? Te queremos, Valeria, y te esperamos ese día.`, novia: `Vale, hoy quiero agradecerte por ser mi cómplice, mi incondicional, mi otra mitad.
 
 Sabes que te amo, y que eres la primera en saber todo lo que hago o haré, gracias por apoyarme y por siempre decirme la verdad.
 
@@ -549,17 +589,43 @@ Ni siquiera te digo que espero contar con tu presencia porque sé que ahí estar
 
 Entonces que dices, aceptas ser mi testigo?` },
 
-            'Hilda Rubio': { header: 'Hilda', novio: ``, novia: `Hola Hilda, el día de hoy te escribo esto ya que me gustaría tenerte presente el día de mi boda civil, será algo muy íntimo y por eso mismo hemos tomado la decisión de invitar solo a aquellas personas que realmente queremos presentes y que sentimos que de manera genuina estarán felices por nosotros, es por eso que me haría muy feliz que ese día pudieras acompañarnos en un día tan especial para nosotros.
+            'Hilda Rubio': { header: 'Hilda', novio: `Hola, Hilda.
+
+Te escribo estas palabras para invitarte el 23 de octubre a la unión en Registro Civil de Areli conmigo.
+
+Areli y yo estuvimos debatiendo, dialogando sobre cómo llevar este evento. Sabemos que es un evento corto, durará poco y no hay una fiesta planeada para una vez que finalice dicho evento. Pero aun así, sabemos que es un instante que, a pesar de ser breve, es muy importante, muy trascendental, muy significativo y, por lo mismo, llegamos a la conclusión de invitar a aquellas personas que realmente hemos sentido de manera real con nosotros en el proceso, compartiendo, apoyando, viviendo.
+
+Y tú eres una de esas personas. Así que tu presencia nos haría una sensación grata. Ojalá y puedas ir, estás invitada formalmente.
+
+Gracias por el tiempo que has invertido en Areli y en mí, por el apoyo constante que hemos recibido. Gracias por estar.`, novia: `Hola Hilda, el día de hoy te escribo esto ya que me gustaría tenerte presente el día de mi boda civil, será algo muy íntimo y por eso mismo hemos tomado la decisión de invitar solo a aquellas personas que realmente queremos presentes y que sentimos que de manera genuina estarán felices por nosotros, es por eso que me haría muy feliz que ese día pudieras acompañarnos en un día tan especial para nosotros.
 
 Te quiero mucho, gracias por todo, hemos pasado por muchas cosas pero todo siempre se resume a estar ahí la una para la otra, espero que sigamos compartiendo juntas, y seguir aprendiendo de ti, gracias por estar presente en mis peores y mejores momentos.` },
 
-            'Jareth Ríos': { header: 'Jareth', novio: ``, novia: `Hermano, solamente quiero que sepas que aunque no te lo diga seguido, te quiero mucho, te admiro, y estoy orgullosa de ti.
+            'Jareth Ríos': { header: 'Jareth', novio: `Hola, Jared.
+
+Te escribo esta carta para invitarte formalmente el 23 de octubre del presente año a la unión mediante el Registro Civil entre tu hermana Areli y yo.
+
+¿Sabes? Hace unos años llegué a su casa, entré como un desconocido y poco a poco, con el tiempo, fui acercándome a cada uno de ustedes, conociendo cómo son, dialogando, compartiendo momentos, fiestas, alegrías, tristezas, de todo, y realmente me siento cómodo y feliz de poder decir que en su familia encontré una segunda familia.
+
+Con cada uno de ustedes, incluyéndote, he tenido momentos que tengo en mi memoria y perseveré en mi memoria. Me acuerdo de vez en cuando cuando fuimos a mi universidad a jugar un torneo y perdimos la final.
+
+¿Sabes, Jared? Ya no hemos podido convivir tanto como antes, como en un principio que hablábamos un poquito más, pero quiero que sepas que cuando necesites algo, si un día quieres hablar con alguien, compartir un momento, lo que sea, allí estaré.
+
+Gracias. Y volviendo al tema principal, nos gustaría verte por allá si tienes tiempo. Sería bueno que nos acompañaras, puesto que eres una persona importante para nosotros.`, novia: `Hermano, solamente quiero que sepas que aunque no te lo diga seguido, te quiero mucho, te admiro, y estoy orgullosa de ti.
 
 Compartimos muchos momentos juntos cuando éramos niños y nunca me imaginé algún día estar escribiéndote unas palabras para que el siguiente momento que compartiéramos fuera el de mi boda, así que espero que ese día puedas estar presente, porque aunque la ceremonia dure unos pocos minutos, el recuerdo de tener a las personas más importantes en mi vida dentro de ese momento me durará toda la vida.
 
 Te quiero mucho❤️` },
 
-            'Nazareth Ríos': { header: 'Naza', novio: ``, novia: `Naza, estas palabras son solo un pretexto para decirte que te quiero mucho, que estoy orgullosa de ti, del hombre que eres, gracias por estar ahí, porque aunque silenciosamente, lo estás, espero que sepas que yo igual para ti y que te quiero mucho y siempre querré lo mejor para ti, te lo mereces.
+            'Nazareth Ríos': { header: 'Naza', novio: `Hola, Nazaret.
+
+Te escribo esta carta para invitarte formalmente el 23 de octubre del presente año a la boda de Areli conmigo.
+
+Genuinamente te hago llegar esta invitación. Sé que a veces por temas de trabajo se nos complica movernos o estar en ciertos lugares, pero aun así, de corazón te digo, si tienes tiempo me gustaría verte por allá porque quizás nos conocemos demasiado, es decir, nadie termina por conocerse a sí mismo siquiera, pero creo que, a pesar de que eres alguien sigiloso y reservado, hemos podido dialogar por momentos, hemos podido compartir experiencias, consejos, memorias, hechos, momentos, entonces de alguna manera siento que hemos podido conectar y no sé, quisiera poder en el futuro tener más oportunidades para dialogar contigo.
+
+Eres una persona buena y una persona interesante. Te lo comento solo para aprovechar el espacio, puesto que regularmente no solemos comunicarnos unos con otros de esta forma, pero aun así, cuando se abre un espacio para poder hacerlo, creo que aprovecharlo es bueno.
+
+En fin, volviendo al inicio, el 23 de octubre será el día en el que tu hermana Areli y yo nos vamos a unir como pareja formal, como esposos, y si puedes ir sería un honor verte por allá.`, novia: `Naza, estas palabras son solo un pretexto para decirte que te quiero mucho, que estoy orgullosa de ti, del hombre que eres, gracias por estar ahí, porque aunque silenciosamente, lo estás, espero que sepas que yo igual para ti y que te quiero mucho y siempre querré lo mejor para ti, te lo mereces.
 
 Así que con estas palabras te digo que me haría muy feliz que pudieras acompañarnos a mí y a Roberto el día de nuestra boda, aunque será una ceremonia muy rápida, tu presencia es importante para nosotros.
 
@@ -778,27 +844,29 @@ Sé que a veces no está en nuestras manos poder estar en todo, así que si esta
                 stage.style.cssText = 'position:fixed;left:-12000px;top:0';
                 document.body.appendChild(stage);
                 const mk = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt !== undefined) e.textContent = txt; return e; };
-                const pie = () => mk('div', 'pdf-pie', '');
+                const pie = () => mk('div', 'pdf-pie', 'Areli Ríos & Roberto Figueroa  ·  23 de octubre de 2026');
                 const pagina = (portada) => {
                     const pg = mk('div', 'pdf-page'), f1 = mk('div', 'pdf-f1'), f2 = mk('div', 'pdf-f2' + (portada ? ' pdf-portada' : ''));
-                    f1.appendChild(f2); pg.appendChild(f1); stage.appendChild(pg); return { pg, f2 };
+                    f1.appendChild(f2); ['tl','tr','bl','br'].forEach(c => f1.appendChild(mk('div', 'pdf-c ' + c))); pg.appendChild(f1); stage.appendChild(pg); return { pg, f2 };
                 };
                 /* portada */
                 const pt = pagina(true);
-                pt.f2.innerHTML = '<div style="font-family:\'Cormorant Garamond\',serif;font-style:italic;font-size:20px;letter-spacing:.3em;color:#9E8056">para</div>' +
-                    '<div style="font-family:\'Pinyon Script\',cursive;font-size:84px;color:#9E8056;line-height:1.2;margin:8px 0 26px"></div>' +
-                    '<hr style="border:0;border-top:1px solid #DCCFB8;width:110px;margin:0 auto 26px">' +
-                    '<div style="font-family:\'Pinyon Script\',cursive;font-size:52px;color:#59534C;line-height:1.2">Areli &amp; Roberto</div>' +
-                    '';
-                pt.f2.children[1].textContent = d.header;
+                pt.f2.innerHTML = '<div class="pdf-mono">A &amp; R</div>' +
+                    '<div style="font-family:\'Cormorant Garamond\',serif;font-style:italic;font-size:20px;letter-spacing:.3em;color:#9E8056">para</div>' +
+                    '<div style="font-family:\'Pinyon Script\',cursive;font-size:84px;color:#9E8056;line-height:1.2;margin:8px 0 22px"></div>' +
+                    '<div class="pdf-orn"><i></i><b></b><i></i></div>' +
+                    '<div style="font-family:\'Pinyon Script\',cursive;font-size:50px;color:#59534C;line-height:1.2;margin-top:22px">Areli &amp; Roberto</div>' +
+                    '<div style="font-family:\'Cormorant Garamond\',serif;font-style:italic;font-size:19px;color:#7a6c57;margin-top:34px;line-height:1.8">Carta de Areli Ríos<br>Carta de Roberto Figueroa</div>' +
+                    '<div style="font-family:\'Montserrat\',sans-serif;font-size:11px;letter-spacing:.32em;color:#9E8056;margin-top:40px;text-transform:uppercase">23 de octubre de 2026 · Guadalajara, Jalisco</div>';
+                pt.f2.children[2].textContent = d.header;
                 /* cartas */
-                [['novia', 'la carta de la novia'], ['novio', 'la carta del novio']].forEach(([q, etiqueta]) => {
+                (!d.novia && !d.novio ? [['novia', 'Areli & Roberto']] : [['novia', 'Areli Ríos'], ['novio', 'Roberto Figueroa']]).forEach(([q, etiqueta]) => {
                     const parrafos = textoPara(d, q).split(/\n+/).map(s => s.trim()).filter(Boolean);
                     const nueva = (primera) => {
                         const p = pagina(false);
                         if (primera) {
                             const cab = mk('div', 'pdf-cab');
-                            cab.appendChild(mk('div', 'a', d.header)); cab.appendChild(mk('div', 'b', etiqueta)); cab.appendChild(mk('hr'));
+                            cab.appendChild(mk('div', 'l', 'carta de')); cab.appendChild(mk('div', 'a', etiqueta)); const o = mk('div', 'pdf-orn'); o.innerHTML = '<i></i><b></b><i></i>'; cab.appendChild(o); cab.appendChild(mk('div', 'para', 'para ' + d.header));
                             p.f2.appendChild(cab);
                         }
                         const body = mk('div', 'pdf-body'); p.f2.appendChild(body); p.f2.appendChild(pie());
@@ -808,7 +876,7 @@ Sé que a veces no está en nuestras manos poder estar en todo, así que si esta
                     const cabe = () => body.scrollHeight <= body.clientHeight + 1;
                     const pon = (el, primeraVez = true) => { body.appendChild(el); if (!cabe() && body.children.length > 1) { body.removeChild(el); body = nueva(false); body.appendChild(el); } };
                     parrafos.forEach(t => pon(mk('p', 'pdf-p', t)));
-                    pon(mk('p', 'pdf-firma', firmaPara(d, q)));
+                    pon(mk('p', 'pdf-firma', etiqueta));
                 });
                 const pdf = new window.jspdf.jsPDF({ unit: 'mm', format: 'a4' });
                 const pags = [...stage.querySelectorAll('.pdf-page')];
