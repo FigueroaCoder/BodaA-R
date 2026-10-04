@@ -731,7 +731,7 @@ Sé que a veces no está en nuestras manos poder estar en todo, así que si esta
                 ruleta.style.cursor = 'grabbing';
             }
             if (movido) {
-                pos = (((p0 - dx / paso()) % RN) + RN) % RN;
+                pos = (((p0 - dx * 0.42 / paso()) % RN) + RN) % RN;   /* arrastre más lento y menos sensible */
                 const ahora = performance.now(), dt = ahora - tPrev;
                 if (dt > 0) vel = 0.8 * vel + 0.2 * ((e.clientX - xPrev) / dt);
                 xPrev = e.clientX; tPrev = ahora;
@@ -743,7 +743,7 @@ Sé que a veces no está en nuestras manos poder estar en todo, así que si esta
             arrastra = false; ruleta.style.cursor = '';
             if (movido) {
                 /* un poco de inercia y se acomoda una carta en el centro */
-                const extra = Math.max(-3, Math.min(3, -vel * 250 / paso()));
+                const extra = Math.max(-1, Math.min(1, -vel * 90 / paso()));   /* una sacudida mueve como máximo una carta */
                 objetivo = (((Math.round(pos + extra)) % RN) + RN) % RN;
                 pausaHasta = performance.now() + 7000;
                 suprime = true; setTimeout(() => { suprime = false; }, 60);
@@ -928,6 +928,14 @@ Sé que a veces no está en nuestras manos poder estar en todo, así que si esta
             const bgMusic = document.getElementById('bgMusic');
             const musicText = document.getElementById('musicText');
             bgMusic.volume = 0.6;
+            let usuarioPauso = false;   /* solo se detiene si la persona pulsa Pausar */
+            if ('mediaSession' in navigator) {
+                try {
+                    navigator.mediaSession.metadata = new MediaMetadata({ title: 'Areli & Roberto', artist: 'Boda · 23 de octubre de 2026' });
+                    navigator.mediaSession.setActionHandler('play', () => { usuarioPauso = false; bgMusic.muted = false; bgMusic.play().catch(() => {}); });
+                    navigator.mediaSession.setActionHandler('pause', () => { usuarioPauso = true; bgMusic.pause(); });
+                } catch (_) {}
+            }
 
             function syncMusic() {
                 const on = !bgMusic.paused && !bgMusic.muted;
@@ -958,16 +966,19 @@ Sé que a veces no está en nuestras manos poder estar en todo, así que si esta
 
             musicToggle.addEventListener('click', () => {
                 desarmar();
+                usuarioPauso = false;
                 if (!bgMusic.paused && bgMusic.muted) { bgMusic.muted = false; syncMusic(); }
                 else if (bgMusic.paused) { bgMusic.muted = false; bgMusic.play().catch(() => {}); }
-                else { bgMusic.pause(); }
+                else { usuarioPauso = true; bgMusic.pause(); }
             });
 
-            /* Se pausa al salir de la página / bloquear el celular y se reanuda al volver */
-            document.addEventListener('visibilitychange', () => {
-                if (document.hidden) { if (!bgMusic.paused) { reanudar = true; bgMusic.pause(); } }
-                else if (reanudar) { reanudar = false; bgMusic.play().catch(() => {}); }
-            });
+            /* La música sigue sonando al salir de la página, al abrir WhatsApp o al cambiar de app.
+               Si el navegador la detiene por su cuenta, se reanuda sola (a menos que la persona haya pulsado Pausar). */
+            const reintenta = () => { if (!usuarioPauso && bgMusic.paused && bgMusic.currentTime > 0) bgMusic.play().catch(() => {}); };
+            bgMusic.addEventListener('pause', () => setTimeout(reintenta, 150));
+            document.addEventListener('visibilitychange', reintenta);
+            window.addEventListener('pageshow', reintenta);
+            window.addEventListener('focus', reintenta);
 
             const portada = document.getElementById('portada');
             function abrir() { portada.classList.add('fuera'); document.body.classList.remove('cover-on'); window.scrollTo(0, 0); }
