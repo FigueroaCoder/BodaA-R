@@ -2,7 +2,7 @@
 <html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#F4F0E8">
     <title>Boda Civil: Areli & Roberto</title>
     
@@ -15,6 +15,7 @@
     <script>
         tailwind.config = {
             theme: {
+                screens: { sm: { raw: '(min-width: 640px) and (pointer: fine)' }, md: { raw: '(min-width: 768px) and (pointer: fine)' }, lg: { raw: '(min-width: 1024px) and (pointer: fine)' } },
                 extend: {
                     colors: {
                         cream: '#FDFBF7',
@@ -131,9 +132,9 @@
         html { -webkit-text-size-adjust: 100%; overflow-x: hidden; }
         body { overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
         .pantalla { position: relative; display: flex; flex-direction: column; justify-content: center;
-            min-height: 72vh; min-height: 72svh; }
-        .pantalla-hero { min-height: calc(100vh - 2.5rem); min-height: calc(100svh - 2.5rem); }
-        @media (min-width: 640px) {
+            min-height: calc(var(--H, 100svh) * .72); }
+        .pantalla-hero { min-height: calc(var(--H, 100svh) - 2.5rem); }
+        @media (min-width: 640px) and (pointer: fine) {
             .pantalla, .pantalla-hero { min-height: 0; }
         }
         .scroll-cue { position: absolute; left: 50%; bottom: .6rem; transform: translateX(-50%);
@@ -143,11 +144,20 @@
         .scroll-cue svg { width: 18px; height: 18px; animation: cueBounce 1.6s ease-in-out infinite; }
         .scroll-cue.oculto { opacity: 0; }
         @keyframes cueBounce { 0%,100% { transform: translateY(0); opacity: .5; } 50% { transform: translateY(6px); opacity: 1; } }
-        @media (min-width: 640px) { .scroll-cue { display: none; } }
+        @media (min-width: 640px) and (pointer: fine) { .scroll-cue { display: none; } }
         @media (prefers-reduced-motion: reduce) {
             .fade-in-element { transition: none; opacity: 1; transform: none; }
             .scroll-cue svg { animation: none; }
         }
+    
+        body.cover-on { overflow: hidden; height: 100vh; }
+        #portada { position: fixed; inset: 0; z-index: 2000; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.4rem;
+            background: #F4F0E8; text-align: center; padding: 24px; transition: opacity .9s ease, visibility .9s; cursor: pointer; }
+        #portada.fuera { opacity: 0; visibility: hidden; pointer-events: none; }
+        #portada .mono { width: 7.5rem; height: 7.5rem; border-radius: 9999px; border: 1px solid rgba(197,168,128,.5); display: flex; align-items: center; justify-content: center;
+            box-shadow: inset 0 0 0 6px #F4F0E8, inset 0 0 0 7px rgba(197,168,128,.35); font-family: 'Cormorant Garamond', serif; color: #9E8056; font-size: 1.7rem; letter-spacing: .25em; padding-left: .25em; }
+        #portada .tap { font-family: 'Montserrat', sans-serif; font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: #9E8056; animation: tapP 1.8s ease-in-out infinite; }
+        @keyframes tapP { 0%,100% { opacity: .45; } 50% { opacity: 1; } }
     </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
@@ -179,7 +189,26 @@
         .pdf-portada{justify-content:center;align-items:center;text-align:center}
     </style>
 </head>
-<body class="min-h-screen py-2 sm:py-6 md:py-14 px-2 sm:px-6 flex flex-col items-center no-scrollbar">
+<body class="cover-on min-h-screen py-2 sm:py-6 md:py-14 px-2 sm:px-6 flex flex-col items-center no-scrollbar">
+
+    <div id="portada" role="button" tabindex="0" aria-label="Abrir invitación">
+        <div class="mono">A &amp; R</div>
+        <p style="font-family:'Pinyon Script',cursive;font-size:2.4rem;color:#2C2B29;line-height:1.1">Areli &amp; Roberto</p>
+        <p class="tap">Toca para abrir tu invitación</p>
+    </div>
+    <script>
+    /* Si el celular muestra la página como escritorio (pantalla "alejada"), se acerca al tamaño real del teléfono */
+    (function () {
+        function ajustar() {
+            var de = document.documentElement, b = document.body;
+            var touch = matchMedia('(pointer: coarse)').matches && Math.min(screen.width, screen.height) <= 900;
+            var z = touch ? innerWidth / Math.min(screen.width, 500) : 1;
+            if (touch && z > 1.25) { b.style.zoom = z; b.style.width = (innerWidth / z) + 'px'; de.style.setProperty('--H', (innerHeight / z) + 'px'); }
+            else { b.style.zoom = ''; b.style.width = ''; de.style.removeProperty('--H'); }
+        }
+        ajustar(); addEventListener('resize', ajustar); addEventListener('orientationchange', ajustar);
+    })();
+    </script>
 
     <!-- Botón Flotante para Música Ambiental -->
     <div class="fixed z-50 right-3 sm:right-4 top-[max(0.75rem,env(safe-area-inset-top))]">
@@ -872,11 +901,20 @@ Sé que a veces no está en nuestras manos poder estar en todo, así que si esta
                 else if (reanudar) { reanudar = false; bgMusic.play().catch(() => {}); }
             });
 
+            const portada = document.getElementById('portada');
+            function abrir() { portada.classList.add('fuera'); document.body.classList.remove('cover-on'); window.scrollTo(0, 0); }
+            function desdePortada() {
+                bgMusic.muted = false;
+                const p = bgMusic.play();
+                if (p && p.then) p.then(() => { desarmar(); syncMusic(); }).catch(() => {});
+                abrir();
+            }
+            portada.addEventListener('click', desdePortada);
+            portada.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') desdePortada(); });
+            /* 1) intenta sonar solo; si el navegador lo permite, se abre sin portada.
+               2) si lo bloquea (celulares), el toque de la portada inicia la música automáticamente. */
             bgMusic.muted = false;
-            bgMusic.play().then(desarmar).catch(() => {
-                bgMusic.muted = true;                    /* intento en silencio (los navegadores lo permiten) */
-                bgMusic.play().catch(() => {});
-            });
+            bgMusic.play().then(() => { desarmar(); abrir(); }).catch(() => {});
             evs.forEach(x => window.addEventListener(x, arrancar, true));
         });
     </script>
