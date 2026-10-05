@@ -175,7 +175,7 @@
         .opt-btn.act{background:#2C2B29;color:#FDFBF7;border-color:#2C2B29}
         .opt-btn .n{font-family:"Pinyon Script",cursive;font-size:2rem;line-height:1.1}
         .opt-btn .t{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:.95rem}
-        .pdf-page{width:794px;height:1123px;box-sizing:border-box;padding:42px;color:#2b201b;background:radial-gradient(ellipse at 18% 10%,rgba(120,80,50,.12) 0,transparent 42%),radial-gradient(ellipse at 88% 92%,rgba(100,70,50,.16) 0,transparent 46%),radial-gradient(ellipse at center,rgba(0,0,0,0) 52%,rgba(70,45,30,.34) 100%),repeating-linear-gradient(0deg,rgba(90,60,40,.04) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(90,60,40,.03) 0 1px,transparent 1px 4px),#d8c9b8}
+        .pdf-page{width:794px;height:1123px;box-sizing:border-box;padding:42px;color:#2b201b;background:radial-gradient(ellipse at 18% 10%,rgba(120,80,50,.05) 0,transparent 42%),radial-gradient(ellipse at 88% 92%,rgba(100,70,50,.07) 0,transparent 46%),radial-gradient(ellipse at center,rgba(0,0,0,0) 52%,rgba(70,45,30,.12) 100%),repeating-linear-gradient(0deg,rgba(90,60,40,.018) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(90,60,40,.014) 0 1px,transparent 1px 4px),#f4ecdf}
         .pdf-f1{height:100%;box-sizing:border-box;border:1px solid #8a6e52;padding:7px}
         .pdf-f2{height:100%;box-sizing:border-box;border:1px solid #a89279;padding:56px 64px 40px;display:flex;flex-direction:column}
         .pdf-cab{text-align:center;margin-bottom:26px}
@@ -243,7 +243,7 @@
                 <button type="submit" class="bg-charcoal hover:bg-goldDark text-cream px-6 py-2.5 font-serif italic text-lg transition-colors rounded-xs">abrir mi carta</button>
                 <button type="button" onclick="cancelarClave()" class="border border-goldAccent/50 text-goldDark px-5 py-2.5 font-serif italic text-lg rounded-xs">cancelar</button>
             </div>
-            <p class="font-serif italic text-sm text-goldDark mt-6"></p>
+            <p class="font-serif italic text-sm text-goldDark mt-6">y eterno para quienes lo viven</p>
         </form>
     </div>
 
@@ -530,7 +530,7 @@ Yo quiero ser un gran hombre para ella, amarla, respetarla, enseñarle que en el
 
 Creo que podría explayarme más, pero realmente lo que quiero decir es gracias. Gracias por todo, gracias por traer al mundo a la persona que más amo, a la persona que más me importa. Y de paso también gracias por haberme dado la confianza, dejarme pasar a su casa cuando yo era un simple desconocido.
 
-Quiero que sepan que en mi casa también siempre encontrarán su casa, que los quiero mucho y que realmente me gustaría verlos ese día por allá. Son personas muy importantes para Areli y para mí.
+Quiero que sepan que en mi casa también siempre encontrarán en mi casa, que los quiero mucho y que realmente me gustaría verlos ese día por allá. Son personas muy importantes para Areli y para mí.
 
 Los invito el 23 de octubre de 2026 a nuestra boda civil.`, novia: `El día de hoy te escribo estas palabras para recordarte que eres de las personas más importantes en mi vida, y al ser así, me gustaría que pudieras acompañarme en uno de los días más importantes y felices de mi vida, mi boda, el tiempo pasa rápido, en algún momento mis invitaciones eran a festivales de la escuela y ahora te pido que seas parte de la ceremonia que unirá mi vida a la de otra persona, te amo mamá y nada me haría más feliz que ese día pudieras estar presente en el momento que Roberto y yo pasemos de ser novios a esposos.
 
@@ -546,7 +546,7 @@ Yo quiero ser un gran hombre para ella, amarla, respetarla, enseñarle que en el
 
 Creo que podría explayarme más, pero realmente lo que quiero decir es gracias. Gracias por todo, gracias por traer al mundo a la persona que más amo, a la persona que más me importa. Y de paso también gracias por haberme dado la confianza, dejarme pasar a su casa cuando yo era un simple desconocido.
 
-Quiero que sepan que en mi casa también siempre encontrarán su casa, que los quiero mucho y que realmente me gustaría verlos ese día por allá. Son personas muy importantes para Areli y para mí.
+Quiero que sepan que en mi casa también siempre encontrarán en mi casa, que los quiero mucho y que realmente me gustaría verlos ese día por allá. Son personas muy importantes para Areli y para mí.
 
 Los invito el 23 de octubre de 2026 a nuestra boda civil.`, novia: `Hola pa, el día de hoy te escribo estas palabras con un poco de sentimientos encontrados, ya que no me cae el 20 de cuando pasé de ser una niña que corría a los brazos de su papá, a ser una mujer que está a punto de casarse, quiero que sepas que agradezco todo lo que tuve que vivir porque solo así podría darme cuenta de que no pude elegir mejor hombre, así que me gustaría que el día que Roberto y yo nos casemos estuvieras presente, ya que para nosotros eres alguien importante y con quien estamos muy agradecidos, esperamos contar con tu presencia en ese día tan importante para nosotros, y aunque ahora sea mayor, siempre encontraré en tus brazos un refugio y en tus consejos una esperanza. ❤️
 
@@ -896,6 +896,7 @@ Sé que a veces no está en nuestras manos poder estar en todo, así que si esta
                     '<div style="font-family:\'Cormorant Garamond\',serif;font-style:italic;font-size:19px;color:#5e4a3b;margin-top:34px;line-height:1.8">' + (d.soloNovio ? 'Carta de Roberto Figueroa' : (!d.novia && !d.novio ? 'Carta de Areli &amp; Roberto' : 'Carta de Areli Ríos<br>Carta de Roberto Figueroa')) + '</div>' +
                     '<div style="font-family:\'Montserrat\',sans-serif;font-size:11px;letter-spacing:.32em;color:#6e5440;margin-top:40px;text-transform:uppercase">23 de octubre de 2026 · Guadalajara, Jalisco</div>';
                 pt.f2.children[2].textContent = d.header;
+                pt.pg.remove();   /* la portada no se incluye en el PDF */
                 /* cartas */
                 (d.soloNovio ? [['novio', 'Roberto Figueroa']] : !d.novia && !d.novio ? [['novia', 'Areli & Roberto']] : [['novia', 'Areli Ríos'], ['novio', 'Roberto Figueroa']]).forEach(([q, etiqueta]) => {
                     const parrafos = textoPara(d, q).split(/\n+/).map(s => s.trim()).filter(Boolean);
@@ -918,7 +919,7 @@ Sé que a veces no está en nuestras manos poder estar en todo, así que si esta
                 const pdf = new window.jspdf.jsPDF({ unit: 'mm', format: 'a4' });
                 const pags = [...stage.querySelectorAll('.pdf-page')];
                 for (let n = 0; n < pags.length; n++) {
-                    const c = await html2canvas(pags[n], { scale: 2, backgroundColor: '#d8c9b8', useCORS: true });
+                    const c = await html2canvas(pags[n], { scale: 2, backgroundColor: '#f4ecdf', useCORS: true });
                     if (n > 0) pdf.addPage();
                     pdf.addImage(c.toDataURL('image/jpeg', 0.95), 'JPEG', 0, 0, 210, 297);
                 }
